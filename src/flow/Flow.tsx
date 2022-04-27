@@ -14,34 +14,50 @@ import {
 export default function Flow() {
 	const [nodes, setNodes] = useState<NodeObject[]>(treeNodes);
 	const [edges, setEdges] = useState<EdgeObject[]>(treeEdges);
-	const [expand, setExpand] = useState(true);
+	const [collapse, setCollapse] = useState(true);
 
 	const onNodeClicked = (nodeId) => {
+		if (nodeId === "1") {
+			if (collapse) {
+				setEdges([]);
+				setNodes([treeNodes[0]]);
+				setCollapse(false);
+			} else {
+				setEdges(treeEdges);
+				setNodes(treeNodes);
+				setCollapse(true);
+			}
+		}
+		// get selected node
 		let selectedNode = treeNodes.filter(
 			(n) => n.id === nodeId && n.data?.nodes
 		);
-		let selectedEdges = treeEdges.filter(
-			(e) =>
-				e.data?.parentId === nodeId ||
-				e.data?.subParentId === nodeId ||
-				e.data?.subParentId2 === nodeId
-		);
+		//get selected edges
+		let selectedEdges = treeEdges.filter((e) => {
+			return e.data?.parents?.includes(nodeId);
+		});
+		//check if selectedNode array no empty
 		if (selectedNode.length) {
+			// get nodes by ids
 			let getNodes = selectedNode[0].data?.nodes
 				.map((n) => treeNodes.filter((node) => node.id === n.id))
 				.reduce((p, n) => [...p, ...n]);
-			if (expand) {
+
+			if (collapse) {
+				//return all [nodes || edges] without children nodes for selected item
 				let nItems = [...nodes].filter(function (el) {
 					return getNodes.indexOf(el) < 0;
 				});
+
 				let eItems = [...edges].filter(function (el) {
 					return selectedEdges.indexOf(el) < 0;
 				});
 				setNodes(nItems);
 				setEdges(eItems);
-				setExpand(false);
+				console.log(collapse);
+				setCollapse(false);
 			}
-			if (!expand) {
+			if (!collapse) {
 				nodes.filter((el) => {
 					if (!getNodes.includes(el)) {
 						return setNodes([...nodes, ...getNodes]);
@@ -57,7 +73,7 @@ export default function Flow() {
 						return setEdges([...edges]);
 					}
 				});
-				setExpand(true); // to not repeat elements
+				setCollapse(true); // to not repeat elements
 			}
 		}
 	};

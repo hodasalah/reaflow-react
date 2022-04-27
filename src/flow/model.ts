@@ -2,8 +2,7 @@ export interface NodeObject {
   id: string;
   text: string;
   data?: {
-    parent?: string,
-    subParent?: string
+    parents?: string[]
     nodes?: { id: string }[]
   },
 }
@@ -12,9 +11,7 @@ export interface EdgeObject {
   from: string
   to: string
   data: {
-    parentId: string
-    subParentId?: string
-    subParentId2?: string
+    parents: string[]
   },
 
 }
