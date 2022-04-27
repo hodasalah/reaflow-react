@@ -60,17 +60,21 @@ export default function Flow() {
 			if (!collapse) {
 				nodes.filter((el) => {
 					if (!getNodes.includes(el)) {
-						return setNodes([...nodes, ...getNodes]);
+						setNodes([...nodes, ...getNodes]);
+						setCollapse(true);
 					} else {
-						return setNodes([...nodes]);
+						setNodes([...nodes]);
+						setCollapse(true);
 					}
 				});
 				edges.filter((el) => {
 					// to be sure that we add elem one time
 					if (!selectedEdges.includes(el)) {
-						return setEdges([...edges, ...selectedEdges]);
+						setEdges([...edges, ...selectedEdges]);
+						setCollapse(true);
 					} else {
-						return setEdges([...edges]);
+						setEdges([...edges]);
+						setCollapse(true);
 					}
 				});
 				setCollapse(true); // to not repeat elements
