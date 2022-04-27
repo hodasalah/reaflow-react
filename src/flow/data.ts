@@ -9,7 +9,7 @@ export const treeNodes: NodeObject[] = [
     id: "2",
     text: "2",
     data: {
-      parent: "1",
+      parents: ["1"],
       nodes: [
         { id: "6" },
         { id: "7" },
@@ -23,21 +23,22 @@ export const treeNodes: NodeObject[] = [
     id: "3",
     text: "1-98",
     data: {
-      parent: "1",
+      parents: ["1"]
     },
   },
   {
     id: "4",
     text: "1-96",
     data: {
-      parent: "1",
+      parents: ["1"]
     },
   },
   {
     id: "5",
     text: "1-8",
     data: {
-      parent: "1",
+      parents: ["1"],
+
       nodes: [{ id: "11" }, { id: "12" }, { id: "13" }],
     },
   },
@@ -46,7 +47,8 @@ export const treeNodes: NodeObject[] = [
     id: "6",
     text: "1-22",
     data: {
-      parent: "2",
+      parents: ["1", "2"],
+
       nodes: [{ id: "10" }],
     },
   },
@@ -55,29 +57,32 @@ export const treeNodes: NodeObject[] = [
     id: "7",
     text: "1-37",
     data: {
-      parent: "2",
+      parents: ["1", "2"]
+
     },
   },
   {
     id: "8",
     text: "1-18",
     data: {
-      parent: "2",
+      parents: ["1", "2"]
+
     },
   },
   {
     id: "9",
     text: "1-20",
     data: {
-      parent: "2",
+      parents: ["1", "2"]
+
     },
   },
   {
     id: "10",
     text: "1-90",
     data: {
-      parent: "2",
-      subParent: "6",
+      parents: ["1", "2", "6"],
+
     },
   },
   //next Child Nodes
@@ -85,7 +90,8 @@ export const treeNodes: NodeObject[] = [
     id: "11",
     text: "1-19",
     data: {
-      parent: "5",
+      parents: ["1", "5"],
+
       nodes: [{ id: "12" }, { id: "13" }],
     },
   },
@@ -93,8 +99,8 @@ export const treeNodes: NodeObject[] = [
     id: "12",
     text: "1-38",
     data: {
-      parent: "5",
-      subParent: "11",
+      parents: ["1", "5", "11"],
+
       nodes: [{ id: "13" }],
     },
   },
@@ -102,8 +108,8 @@ export const treeNodes: NodeObject[] = [
     id: "13",
     text: "1-77",
     data: {
-      parent: "5",
-      subParent: "6",
+      parents: ["1", "5", "6"]
+
     },
   },
 ];
@@ -114,7 +120,7 @@ export const treeEdges: EdgeObject[] = [
     from: "1",
     to: "2",
     data: {
-      parentId: "1",
+      parents: ["1"]
     },
   },
   {
@@ -122,7 +128,7 @@ export const treeEdges: EdgeObject[] = [
     from: "1",
     to: "3",
     data: {
-      parentId: "1",
+      parents: ["1"]
     },
   },
   {
@@ -130,7 +136,7 @@ export const treeEdges: EdgeObject[] = [
     from: "1",
     to: "4",
     data: {
-      parentId: "1",
+      parents: ["1"]
     },
   },
   {
@@ -138,7 +144,7 @@ export const treeEdges: EdgeObject[] = [
     from: "1",
     to: "5",
     data: {
-      parentId: "1",
+      parents: ["1"]
     },
   },
   {
@@ -146,7 +152,8 @@ export const treeEdges: EdgeObject[] = [
     from: "2",
     to: "6",
     data: {
-      parentId: "2",
+      parents: ["1", "2"]
+
     },
   },
 
@@ -155,7 +162,8 @@ export const treeEdges: EdgeObject[] = [
     from: "2",
     to: "7",
     data: {
-      parentId: "2",
+      parents: ["1", "2"]
+
     },
   },
   {
@@ -163,7 +171,8 @@ export const treeEdges: EdgeObject[] = [
     from: "2",
     to: "8",
     data: {
-      parentId: "2",
+      parents: ["1", "2"]
+
     },
   },
   {
@@ -171,7 +180,8 @@ export const treeEdges: EdgeObject[] = [
     from: "2",
     to: "9",
     data: {
-      parentId: "2",
+      parents: ["1", "2"]
+
     },
   },
   {
@@ -179,8 +189,8 @@ export const treeEdges: EdgeObject[] = [
     from: "6",
     to: "10",
     data: {
-      parentId: "2",
-      subParentId: "6",
+      parents: ["1", "2", "6"]
+
     },
   },
   //2sec child nodes edges
@@ -189,7 +199,8 @@ export const treeEdges: EdgeObject[] = [
     from: "5",
     to: "11",
     data: {
-      parentId: "5",
+      parents: ["1", "5"]
+
     },
   },
   {
@@ -197,8 +208,8 @@ export const treeEdges: EdgeObject[] = [
     from: "11",
     to: "12",
     data: {
-      parentId: "5",
-      subParentId: "11",
+      parents: ["1", "5", "11"]
+
     },
   },
   {
@@ -206,9 +217,8 @@ export const treeEdges: EdgeObject[] = [
     from: "12",
     to: "13",
     data: {
-      parentId: "5",
-      subParentId: "11",
-      subParentId2: "12",
+      parents: ["1", "5", "11", "12"]
+
     },
   },
 ];
