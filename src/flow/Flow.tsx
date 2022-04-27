@@ -120,7 +120,6 @@ export default function Flow() {
 				)}
 				arrow={<MarkerArrow style={{ fill: "#212121" }} />}
 				edge={<Edge className="edge" />}
-				onLayoutChange={(layout) => console.log("Layout", layout)}
 			/>
 		</div>
 	);
