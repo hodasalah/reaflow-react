@@ -21,11 +21,9 @@ export default function Flow() {
 			if (collapse) {
 				setEdges([]);
 				setNodes([treeNodes[0]]);
-				setCollapse(false);
 			} else {
 				setEdges(treeEdges);
 				setNodes(treeNodes);
-				setCollapse(true);
 			}
 		}
 		// get selected node
@@ -39,45 +37,39 @@ export default function Flow() {
 		//check if selectedNode array no empty
 		if (selectedNode.length) {
 			// get nodes by ids
-			let getNodes = selectedNode[0].data?.nodes
+			let getNodes = selectedNode[0]?.data?.nodes
 				.map((n) => treeNodes.filter((node) => node.id === n.id))
 				.reduce((p, n) => [...p, ...n]);
-
+			setCollapse(!collapse);
 			if (collapse) {
 				//return all [nodes || edges] without children nodes for selected item
 				let nItems = [...nodes].filter(function (el) {
-					return getNodes.indexOf(el) < 0;
+					return !getNodes.map((n) => n.id).includes(el.id);
 				});
 
 				let eItems = [...edges].filter(function (el) {
-					return selectedEdges.indexOf(el) < 0;
+					return !selectedEdges.map((e) => e.id).includes(el.id);
 				});
 				setNodes(nItems);
 				setEdges(eItems);
-				console.log(collapse);
-				setCollapse(false);
 			}
 			if (!collapse) {
-				nodes.filter((el) => {
+				nodes.forEach((el) => {
 					if (!getNodes.includes(el)) {
 						setNodes([...nodes, ...getNodes]);
-						setCollapse(true);
 					} else {
 						setNodes([...nodes]);
-						setCollapse(true);
 					}
 				});
-				edges.filter((el) => {
+				edges.forEach((el) => {
 					// to be sure that we add elem one time
 					if (!selectedEdges.includes(el)) {
 						setEdges([...edges, ...selectedEdges]);
-						setCollapse(true);
 					} else {
 						setEdges([...edges]);
-						setCollapse(true);
 					}
 				});
-				setCollapse(true); // to not repeat elements
+				setCollapse(!collapse); // to not repeat elements
 			}
 		}
 	};
@@ -86,7 +78,7 @@ export default function Flow() {
 		<div
 			style={{
 				height: "100vh",
-				width: 450,
+				width: "650",
 				position: "relative",
 				margin: "auto",
 			}}
